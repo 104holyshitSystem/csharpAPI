@@ -1,0 +1,12 @@
+D:\holyshit\holyshit\ShitAPI\ShitAPI\bin\Debug\ShitAPI.exe.config
+D:\holyshit\holyshit\ShitAPI\ShitAPI\obj\Debug\ShitAPI.exe
+D:\holyshit\holyshit\ShitAPI\ShitAPI\obj\Debug\ShitAPI.pdb
+D:\holyshit\ShitAPI\ShitAPI\bin\Debug\ShitAPI.exe.config
+D:\holyshit\ShitAPI\ShitAPI\obj\Debug\ShitAPI.exe
+D:\holyshit\ShitAPI\ShitAPI\obj\Debug\ShitAPI.pdb
+D:\holyshit\ShitAPI\ShitAPI\bin\Debug\ShitAPI.exe
+D:\holyshit\ShitAPI\ShitAPI\bin\Debug\ShitAPI.pdb
+D:\holyshit\ShitAPI\ShitAPI\obj\Debug\ShitAPI.csprojResolveAssemblyReference.cache
+D:\holyshit\holyshit\ShitAPI\ShitAPI\bin\Debug\ShitAPI.exe
+D:\holyshit\holyshit\ShitAPI\ShitAPI\bin\Debug\ShitAPI.pdb
+D:\holyshit\holyshit\ShitAPI\ShitAPI\obj\Debug\ShitAPI.csprojResolveAssemblyReference.cache

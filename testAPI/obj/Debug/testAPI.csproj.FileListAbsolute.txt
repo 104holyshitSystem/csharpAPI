@@ -1,0 +1,6 @@
+D:\holyshit\holyshit\ShitAPI\testAPI\bin\Debug\testAPI.exe
+D:\holyshit\holyshit\ShitAPI\testAPI\bin\Debug\testAPI.pdb
+D:\holyshit\holyshit\ShitAPI\testAPI\obj\Debug\testAPI.csprojResolveAssemblyReference.cache
+D:\holyshit\holyshit\ShitAPI\testAPI\obj\Debug\testAPI.exe
+D:\holyshit\holyshit\ShitAPI\testAPI\obj\Debug\testAPI.pdb
+D:\holyshit\holyshit\ShitAPI\testAPI\bin\Debug\testAPI.exe.config

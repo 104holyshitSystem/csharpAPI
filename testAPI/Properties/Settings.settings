@@ -1,0 +1,21 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="testAPI.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="serialPort" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">COM3,COM4</Value>
+    </Setting>
+    <Setting Name="baudRate" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">9600</Value>
+    </Setting>
+    <Setting Name="testMode" Type="System.Boolean" Scope="Application">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="version" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">1.4</Value>
+    </Setting>
+    <Setting Name="postURL" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">http://localhost:3000/holyshit</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
