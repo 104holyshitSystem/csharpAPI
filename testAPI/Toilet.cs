@@ -13,7 +13,8 @@ namespace testAPI
         public string command { get; set; }
         public string value { get { return _value; } set { _value = value; } }
         public long unixtime { get; set; }
-        
+        public int taketime { get; set; }
         
     }
+ 
 }
