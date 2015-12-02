@@ -24,12 +24,14 @@ namespace testAPI
             version = info.version;
         }
         //占用事件計時器
-        long takeTimeStart;
+        long takeTimeOccupy;
+        //鎖門事件計時器
+        long takeTimeLock;
 
         //占用事件
         public void occupy(){
             //占用時間開始
-            takeTimeStart = DateTime.UtcNow.Ticks;
+            takeTimeOccupy = DateTime.UtcNow.Ticks;
             string result = createList("occupy");
             if (sendMessage(result)) {
                 Console.WriteLine(result + " 成功。");
@@ -43,8 +45,8 @@ namespace testAPI
         //釋放事件
         public void release() {
             //占用時間結束
-            takeTimeStart = (DateTime.UtcNow.Ticks - takeTimeStart) / TimeSpan.TicksPerSecond;
-            string result = createList("release",takeTimeStart.ToString());
+            takeTimeOccupy = (DateTime.UtcNow.Ticks - takeTimeOccupy) / TimeSpan.TicksPerSecond;
+            string result = createList("release", takeTimeOccupy.ToString());
             if (sendMessage(result))
             {
                 Console.WriteLine(result + " 成功。");
@@ -58,8 +60,8 @@ namespace testAPI
         //開鎖事件
         public void openlock() {
             //占用時間結束
-            takeTimeStart = (DateTime.UtcNow.Ticks - takeTimeStart) / TimeSpan.TicksPerSecond;
-            string result = createList("openlock", takeTimeStart.ToString());
+            takeTimeLock = (DateTime.UtcNow.Ticks - takeTimeLock) / TimeSpan.TicksPerSecond;
+            string result = createList("openlock", takeTimeLock.ToString());
             if (sendMessage(result))
             {
                 Console.WriteLine(result + " 成功。");
@@ -74,7 +76,7 @@ namespace testAPI
         public void closelock()
         {
             //占用時間開始
-            takeTimeStart = DateTime.UtcNow.Ticks;
+            takeTimeLock = DateTime.UtcNow.Ticks;
             string result = createList("closelock");
             if (sendMessage(result))
             {
@@ -90,6 +92,20 @@ namespace testAPI
         //RFID卡事件
         public void beepRFID(string value="030ac102") {
             string result = createList("beepRFID", value);
+            if (sendMessage(result))
+            {
+                Console.WriteLine(result + " 成功。");
+            }
+            else
+            {
+                Console.WriteLine(result + " 失敗。");
+            }
+        }
+
+        //RF HOT 偵測事件
+        public void bathHOT()
+        {
+            string result = createList("bathHOT");
             if (sendMessage(result))
             {
                 Console.WriteLine(result + " 成功。");
@@ -148,6 +164,9 @@ namespace testAPI
                     break;
                 case "beepRFID":
                     jsonlist.Add(new Toilet { version = version, toiletID = toiletID, command = "beep", value = value, unixtime = unixTime });
+                    break;
+                case "bathHOT":
+                    jsonlist.Add(new Toilet { version = version, toiletID = toiletID, command = "bathHOT", value = "true", unixtime = unixTime });
                     break;
                 default:
                     break;

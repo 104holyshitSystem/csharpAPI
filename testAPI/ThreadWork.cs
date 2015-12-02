@@ -64,6 +64,12 @@ namespace testAPI
                         case "beep":
                             newCommand.beepRFID(submessage[1]);
                             break;
+                        case "Bath":
+                            if (submessage[1] == "in")
+                            {
+                                newCommand.bathHOT();
+                            }
+                            break;
                         default:
                             Console.WriteLine("什麼都沒做。");
                             break;
