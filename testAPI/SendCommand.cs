@@ -24,9 +24,9 @@ namespace testAPI
             version = info.version;
         }
         //占用事件計時器
-        long takeTimeOccupy;
+        long takeTimeOccupy = new DateTime(1970, 1, 1).Ticks;
         //鎖門事件計時器
-        long takeTimeLock;
+        long takeTimeLock = new DateTime(1970, 1, 1).Ticks;
 
         //占用事件
         public void occupy(){
@@ -45,8 +45,8 @@ namespace testAPI
         //釋放事件
         public void release() {
             //占用時間結束
-            takeTimeOccupy = (DateTime.UtcNow.Ticks - takeTimeOccupy) / TimeSpan.TicksPerSecond;
-            string result = createList("release", takeTimeOccupy.ToString());
+            long costtime = (DateTime.UtcNow.Ticks - takeTimeOccupy) / TimeSpan.TicksPerSecond;
+            string result = createList("release", costtime.ToString());
             if (sendMessage(result))
             {
                 Console.WriteLine(result + " 成功。");
@@ -60,8 +60,8 @@ namespace testAPI
         //開鎖事件
         public void openlock() {
             //占用時間結束
-            takeTimeLock = (DateTime.UtcNow.Ticks - takeTimeLock) / TimeSpan.TicksPerSecond;
-            string result = createList("openlock", takeTimeLock.ToString());
+            long costtime = (DateTime.UtcNow.Ticks - takeTimeLock) / TimeSpan.TicksPerSecond;
+            string result = createList("openlock", costtime.ToString());
             if (sendMessage(result))
             {
                 Console.WriteLine(result + " 成功。");

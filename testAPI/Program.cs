@@ -77,7 +77,7 @@ namespace testAPI
             while (config.testMode && open == true)
             {
                 Console.WriteLine("======================================");
-                Console.WriteLine("1.發出廁所占用事件。\n2.發出廁所釋放事件。\n3.發出廁所鎖門事件。\n4.發出廁所開鎖事件。\n5.發出RFID事件。");
+                Console.WriteLine("1.發出廁所占用事件。\n2.發出廁所釋放事件。\n3.發出廁所鎖門事件。\n4.發出廁所開鎖事件。\n5.發出RFID事件。\n6.發出活體感應。");
                 string command = Console.ReadLine();
                 switch (command)
                 {
@@ -100,6 +100,10 @@ namespace testAPI
                     case "5":
                         newCommand.beepRFID();
                         Console.WriteLine("已發送RFID事件。 beep");
+                        break;
+                    case "6":
+                        newCommand.bathHOT();
+                        Console.WriteLine("已活體感應事件。 bathHOT");
                         break;
                     default:
                         open = false;
