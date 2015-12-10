@@ -25,7 +25,7 @@ namespace testAPI
                 Console.WriteLine("測試模式。");
                 Console.WriteLine("api目標為:" + targetURL);
                 Console.WriteLine("廁所id ?");
-                int toiletID = Convert.ToInt32(Console.ReadLine());
+                string toiletID = Console.ReadLine();
                 //設定廁所id
                 config.toiletID = toiletID;
                 SendCommand newCommand = new SendCommand(config);
@@ -39,7 +39,7 @@ namespace testAPI
                 int countToiletID = 1;
                 foreach (string tioletPort in config.serialPort)
                 {
-                    config.toiletID = countToiletID;
+                    //config.toiletID = countToiletID;
                     ThreadWork threadWork = new ThreadWork(config);
                     threadWork.threadSerialPort = tioletPort;
                     ThreadPool.QueueUserWorkItem(new WaitCallback(work), threadWork);
@@ -61,7 +61,7 @@ namespace testAPI
 
         private static void work(object obj) {
             ThreadWork work = (ThreadWork)obj;
-            Console.WriteLine("廁所待命接收訊息中,廁所ID:" + work.toiletID.ToString() + ",位於:" + work.threadSerialPort);
+            Console.WriteLine("廁所待命接收訊息中,廁所ID:" + work.toiletID + ",位於:" + work.threadSerialPort);
             if(work.Start()){
                 Console.WriteLine("廁所ID:" + work.toiletID.ToString()+" 發生異常");
             }
@@ -82,27 +82,27 @@ namespace testAPI
                 switch (command)
                 {
                     case "1":
-                        newCommand.occupy();
+                        newCommand.occupy("test");
                         Console.WriteLine("已發送廁所占用事件。 toilet");
                         break;
                     case "2":
-                        newCommand.release();
+                        newCommand.release("test");
                         Console.WriteLine("已發送廁所釋放事件。 toilet");
                         break;
                     case "3":
-                        newCommand.closelock();
+                        newCommand.closelock("test");
                         Console.WriteLine("已發送廁所鎖門事件。 lock");
                         break;
                     case "4":
-                        newCommand.openlock();
+                        newCommand.openlock("test");
                         Console.WriteLine("已發送廁所開鎖事件。 lock");
                         break;
                     case "5":
-                        newCommand.beepRFID();
+                        newCommand.beepRFID("test","test");
                         Console.WriteLine("已發送RFID事件。 beep");
                         break;
                     case "6":
-                        newCommand.bathHOT();
+                        newCommand.bathHOT("test");
                         Console.WriteLine("已活體感應事件。 bathHOT");
                         break;
                     default:

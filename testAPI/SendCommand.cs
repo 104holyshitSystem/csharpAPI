@@ -15,7 +15,7 @@ namespace testAPI
         //版本
         string version;
         //廁所id
-        int toiletID;
+        string toiletID;
         //目標
         string targetURL;
         public SendCommand(Config info){
@@ -29,10 +29,10 @@ namespace testAPI
         long takeTimeLock = new DateTime(1970, 1, 1).Ticks;
 
         //占用事件
-        public void occupy(){
+        public void occupy(string id){
             //占用時間開始
             takeTimeOccupy = DateTime.UtcNow.Ticks;
-            string result = createList("occupy");
+            string result = createList("occupy",id);
             if (sendMessage(result)) {
                 Console.WriteLine(result + " 成功。");
             }
@@ -43,10 +43,10 @@ namespace testAPI
         }
 
         //釋放事件
-        public void release() {
+        public void release(string id) {
             //占用時間結束
             long costtime = (DateTime.UtcNow.Ticks - takeTimeOccupy) / TimeSpan.TicksPerSecond;
-            string result = createList("release", costtime.ToString());
+            string result = createList("release",id, costtime.ToString());
             if (sendMessage(result))
             {
                 Console.WriteLine(result + " 成功。");
@@ -58,10 +58,10 @@ namespace testAPI
         }
 
         //開鎖事件
-        public void openlock() {
+        public void openlock(string id) {
             //占用時間結束
             long costtime = (DateTime.UtcNow.Ticks - takeTimeLock) / TimeSpan.TicksPerSecond;
-            string result = createList("openlock", costtime.ToString());
+            string result = createList("openlock",id, costtime.ToString());
             if (sendMessage(result))
             {
                 Console.WriteLine(result + " 成功。");
@@ -73,11 +73,11 @@ namespace testAPI
         
         }
         //關鎖事件
-        public void closelock()
+        public void closelock(string id)
         {
             //占用時間開始
             takeTimeLock = DateTime.UtcNow.Ticks;
-            string result = createList("closelock");
+            string result = createList("closelock",id);
             if (sendMessage(result))
             {
                 Console.WriteLine(result + " 成功。");
@@ -90,8 +90,8 @@ namespace testAPI
         }
 
         //RFID卡事件
-        public void beepRFID(string value="030ac102") {
-            string result = createList("beepRFID", value);
+        public void beepRFID(string id,string value="030ac102") {
+            string result = createList("beepRFID",id, value);
             if (sendMessage(result))
             {
                 Console.WriteLine(result + " 成功。");
@@ -103,9 +103,9 @@ namespace testAPI
         }
 
         //RF HOT 偵測事件
-        public void bathHOT()
+        public void bathHOT(string id)
         {
-            string result = createList("bathHOT");
+            string result = createList("bathHOT",id);
             if (sendMessage(result))
             {
                 Console.WriteLine(result + " 成功。");
@@ -141,7 +141,7 @@ namespace testAPI
 
 
         //創造json
-        private string createList(string command,string value="")
+        private string createList(string command,string id,string value="")
         {
             //取得unix 時間
             long epochTicks = new DateTime(1970, 1, 1).Ticks;
@@ -151,22 +151,22 @@ namespace testAPI
             switch (command)
             {
                 case "occupy":
-                    jsonlist.Add(new Toilet { version = version, toiletID = toiletID, command = "toilet", value = "true", unixtime = unixTime });
+                    jsonlist.Add(new Toilet { version = version, toiletID = id, command = "toilet", value = "true", unixtime = unixTime });
                     break;
                 case "release":
-                    jsonlist.Add(new Toilet { version = version, toiletID = toiletID, command = "toilet", value = "false", unixtime = unixTime,taketime = Convert.ToInt32(value) });
+                    jsonlist.Add(new Toilet { version = version, toiletID = id, command = "toilet", value = "false", unixtime = unixTime,taketime = Convert.ToInt32(value) });
                     break;
                 case "closelock":
-                    jsonlist.Add(new Toilet { version = version, toiletID = toiletID, command = "lock", value = "true", unixtime = unixTime });
+                    jsonlist.Add(new Toilet { version = version, toiletID = id, command = "lock", value = "true", unixtime = unixTime });
                     break;
                 case "openlock":
-                    jsonlist.Add(new Toilet { version = version, toiletID = toiletID, command = "lock", value = "false", unixtime = unixTime, taketime = Convert.ToInt32(value) });
+                    jsonlist.Add(new Toilet { version = version, toiletID = id, command = "lock", value = "false", unixtime = unixTime, taketime = Convert.ToInt32(value) });
                     break;
                 case "beepRFID":
-                    jsonlist.Add(new Toilet { version = version, toiletID = toiletID, command = "beep", value = value, unixtime = unixTime });
+                    jsonlist.Add(new Toilet { version = version, toiletID = id, command = "beep", value = value, unixtime = unixTime });
                     break;
                 case "bathHOT":
-                    jsonlist.Add(new Toilet { version = version, toiletID = toiletID, command = "bathHOT", value = "true", unixtime = unixTime });
+                    jsonlist.Add(new Toilet { version = version, toiletID = id, command = "bathHOT", value = "true", unixtime = unixTime });
                     break;
                 default:
                     break;

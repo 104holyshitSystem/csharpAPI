@@ -44,8 +44,8 @@ namespace testAPI
             set { _postURL = value; }
         }
         //接受第幾間廁所
-        private int _toiletID = 0;
-        public int toiletID {
+        private string _toiletID;
+        public string toiletID {
             get { return _toiletID; }
             set { _toiletID = value; }
         }

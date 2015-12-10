@@ -22,7 +22,6 @@ namespace testAPI
         public ThreadWork(Config info)
         {
             config = info;
-            toiletID = config.toiletID;
             postURL = config.postURL;
             version = config.version;
         }
@@ -31,6 +30,7 @@ namespace testAPI
             SerialPort serialPort;
             try
             {
+
                 SendCommand newCommand = new SendCommand(config);
                 serialPort = new SerialPort(threadSerialPort, baudRate, Parity.None, 8, StopBits.One);
                 serialPort.Open();
@@ -38,40 +38,41 @@ namespace testAPI
                 {
                     string message = serialPort.ReadLine().Trim();
                     string[] submessage = message.Split(':');
+                    config.toiletID = submessage[2];
                     switch (submessage[0])
                     {
                         case "Lock":
                             if (submessage[1]=="open")
                             {
-                                newCommand.openlock();      
+                                newCommand.openlock(submessage[2]);      
                             }
                             if (submessage[1]=="close")
                             {
-                                newCommand.closelock();
+                                newCommand.closelock(submessage[2]);
                                 
                             }
                             break;
                         case "Toilet":
                             if (submessage[1]=="in")
                             {
-                                newCommand.occupy();      
+                                newCommand.occupy(submessage[2]);      
                             }
                             if (submessage[1]=="out")
                             {
-                                newCommand.release();
+                                newCommand.release(submessage[2]);
                             }
                             break;
                         case "beep":
-                            newCommand.beepRFID(submessage[1]);
+                            newCommand.beepRFID(submessage[2],submessage[1]);
                             break;
                         case "Bath":
                             if (submessage[1] == "in")
                             {
-                                newCommand.bathHOT();
+                                newCommand.bathHOT(submessage[2]);
                             }
                             break;
                         default:
-                            Console.WriteLine("什麼都沒做。");
+                            //Console.WriteLine("什麼都沒做。");
                             break;
                     }
                     
