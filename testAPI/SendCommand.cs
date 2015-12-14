@@ -116,6 +116,21 @@ namespace testAPI
             }
         }
 
+        //廁所警報事件
+        public void warning(string id)
+        {
+            string result = createList("warning", id);
+            if (sendMessage(result))
+            {
+                Console.WriteLine(result + " 成功。");
+            }
+            else
+            {
+                Console.WriteLine(result + " 失敗。");
+            }
+        }
+
+
         //傳送事件給web
         private bool sendMessage(string message) {
             bool success = false;
@@ -167,6 +182,9 @@ namespace testAPI
                     break;
                 case "bathHOT":
                     jsonlist.Add(new Toilet { version = version, toiletID = id, command = "bathHOT", value = "true", unixtime = unixTime });
+                    break;
+                case "warning":
+                    jsonlist.Add(new Toilet { version = version, toiletID = id, command = "warning", value = "on", unixtime = unixTime });
                     break;
                 default:
                     break;

@@ -71,6 +71,12 @@ namespace testAPI
                                 newCommand.bathHOT(submessage[2]);
                             }
                             break;
+                        case "Warning":
+                            if (submessage[1] == "on")
+                            {
+                                newCommand.warning(submessage[2]);
+                            }
+                            break;
                         default:
                             //Console.WriteLine("什麼都沒做。");
                             break;
